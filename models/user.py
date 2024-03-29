@@ -12,3 +12,4 @@ class User(BaseModel, Base):
     password = Column('password', String(128), nullable=False)
     first_name = Column('first_name', String(128), nullable=True, default="NULL")
     last_name = Column('last_name', String(128), nullable=True, default="NULL")
+
