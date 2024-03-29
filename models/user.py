@@ -10,4 +10,8 @@ class User(BaseModel, Base):
     email = Column('email', String(128), nullable=False)
     password = Column('password', String(128), nullable=False)
     first_name = Column('first_name', String(128), nullable=True, default="NULL")
+<<<<<<< HEAD
     last_name = Column('last_name', String(128), nullable=True, defaulr="NULL")
+=======
+    last_name = Column('last_name', String(128), nullable=True, default="NULL")
+>>>>>>> seba
