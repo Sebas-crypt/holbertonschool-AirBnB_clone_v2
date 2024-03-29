@@ -1,7 +1,9 @@
-#!/usr/bin/python3
+
+#!/Users/melissa/Desktop/holbertonschool-AirBnB_clone_v2-1/hbnb_venv/bin/python
 """ Console Module """
 import cmd
 import sys
+import os
 from models.base_model import BaseModel
 from models.__init__ import storage
 from models.user import User
@@ -37,7 +39,6 @@ class HBNBCommand(cmd.Cmd):
 
     def precmd(self, line):
         """Reformat command line for advanced command syntax.
-
         Usage: <class name>.<command>([<id> [<*args> or <**kwargs>]])
         (Brackets denote optional fields in usage example.)
         """
@@ -74,7 +75,7 @@ class HBNBCommand(cmd.Cmd):
                 if pline:
                     # check for *args or **kwargs
                     if pline[0] == '{' and pline[-1] == '}'\
-                            and type(eval(pline)) is dict:
+                            and type(eval(pline)) == dict:
                         _args = pline
                     else:
                         _args = pline.replace(',', '')
@@ -119,14 +120,14 @@ class HBNBCommand(cmd.Cmd):
             print("** class name missing **")
             return
         else:
-            args_array = args.split()
-            class_name = args_array[0]
-        if class_name not in HBNBCommand.classes:
+            all_args = args.split()
+            class_nm = all_args[0]
+        if class_nm not in HBNBCommand.classes:
             print("** class doesn't exist **")
             return
-        if len(args_array) > 0:
+        if len(all_args) > 0:
             params_dict = {}
-            params = args_array[1:]
+            params = all_args[1:]
             for param in params:
                 param = param.partition("=")
                 key = param[0]
@@ -139,9 +140,9 @@ class HBNBCommand(cmd.Cmd):
                 else:
                     value = int(value)
                 params_dict[key] = value
-        new_instance = HBNBCommand.classes[class_name](**params_dict)
+        new_instance = HBNBCommand.classes[class_nm](**params_dict)
         print(new_instance.id)
-        new_instance.save()
+        storage.save()
 
     def help_create(self):
         """ Help information for the create method """
@@ -217,19 +218,33 @@ class HBNBCommand(cmd.Cmd):
     def do_all(self, args):
         """ Shows all objects, or all objects of a class"""
         print_list = []
-
         if args:
             args = args.split(' ')[0]  # remove possible trailing args
             if args not in HBNBCommand.classes:
                 print("** class doesn't exist **")
                 return
-            for k, v in storage._FileStorage__objects.items():
+            if os.environ.get('HBNB_TYPE_STORAGE') == 'db':
+                objs_dict = storage.all(args)
+            else:
+                objs_dict = storage._FileStorage__objects
+            for k, v in objs_dict.items():
+                try:
+                    del v.__dict__["_sa_instance_state"]
+                except KeyError:
+                    pass
                 if k.split('.')[0] == args:
                     print_list.append(str(v))
         else:
-            for k, v in storage._FileStorage__objects.items():
+            if os.environ.get('HBNB_TYPE_STORAGE') == 'db':
+                objs_dict = storage.all()
+            else:
+                objs_dict = storage._FileStorage__objects
+            for k, v in objs_dict.items():
+                try:
+                    del v.__dict__["_sa_instance_state"]
+                except KeyError:
+                    pass
                 print_list.append(str(v))
-
         print(print_list)
 
     def help_all(self):
