@@ -5,19 +5,23 @@ app = Flask(__name__)
 
 @app.route("/", strict_slashes =False)
 def hello():
+    """ Returns some text. """
     return 'Hello HBNB!'
 
 @app.route("/HBNB", strict_slashes =False)
-def hbnb() :
+def hbnb():
+    """ Return other text. """
     return 'HBNB'
 
 @app.route("/c/<text>", strict_slashes=False)
 def text(text):
+    """ Replace text with variable. """
     text = text.replace ("_", " ")
     return("C {}".format(text))
 
 @app.route ("/python/<text>", strict_slashes=False)
 def texts(text):
+    """ Replace more text with another variable. """
     text = text.replace("_"," ")
     return("python {}".format(text))
 
