@@ -8,7 +8,7 @@ def hello():
     return 'Hello HBNB!'
 
 @app.route("/HBNB", strict_slashes=False)
-def hello() :
+def hello():
     """ Return other text. """
     return 'HBNB'
 
