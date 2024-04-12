@@ -62,3 +62,14 @@ class FileStorage:
             pass
         else:
             del self.__objects["{}.{}".format(type(obj).__name__, obj.id)]
+            
+    def __init__(self):
+        self.__session = 'Session'()
+    
+    def close(self):
+        if hasattr(self.__session, 'remove'):
+            self.__session.remove()
+        elif hasattr(self.__session, 'close'):
+            self.__session.close()
+        else:
+            raise AttributeError("Cannot close session, 'remove' or 'close' method not found.")
