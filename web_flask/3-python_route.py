@@ -22,16 +22,13 @@ def text(text):
     text = text.replace ("_", " ")
     return("C {}".format(text))
 
+@app.route('/python/', defaults={'text': "is cool"}, strict_slashes=False)
 @app.route('/python/<text>', strict_slashes=False)
 def texts(text):
     """ Replace more text with another variable. """
     text = text.replace("_"," ")
     return("python {}".format(text))
 
-@app.route('/number/<n>', strict_slashes=False)
-def numbers(n):
-    if n.isdigit():
-        return '{} is a number'.format(n)
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)
