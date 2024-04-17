@@ -1,6 +1,7 @@
  #!/usr/bin/python3
 """ starts the flask app """
-from flask import Flask, render_template
+from flask import Flask
+from flask import render_template
 
 app = Flask(__name__)
 
@@ -21,7 +22,7 @@ def hbnb() :
 def text(text):
     """ Replace text with variable. """
     text = text.replace ("_", " ")
-    return("C {}".format(text))
+    return 'C ' + text.replace('_', ' ')
 
 
 @app.route('/python', defaults={'text': "is cool"}, strict_slashes=False)
@@ -29,21 +30,21 @@ def text(text):
 def texts(text):
     """ Replace more text with another variable. """
     text = text.replace("_"," ")
-    return("python {}".format(text))
+    return 'Python ' + text.replace('_',' ')
 
 
 @app.route('/number/<n>', strict_slashes=False)
 def numbers(n):
     """ Repalce with int only if given int. """
     if n.isdigit():
-        return '{} is a number'.format(n)
+        return str(n) + " is a number"
 
 
 @app.route('/number_template/<n>', strict_slashes=False)
 def number_templates(n):
-    """ Display html if n is int. """
-    if n.isdigit():
-        return render_template ('5-number.html', n=n)
+    """ Display html if n is int"""
+        return render_template('5-number.html', n=n)
+
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)
