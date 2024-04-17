@@ -2,7 +2,6 @@
 """ starts the flask app """
 from flask import Flask
 
-
 app = Flask(__name__)
 
 
@@ -27,7 +26,7 @@ def text(text):
 def texts(text):
     """ Replace more text with another variable. """
     text = text.replace("_"," ")
-    return("python {}".format(text))
+    return 'Python ' + text.replace('_', ' ')
 
 @app.route('/number/<n>', strict_slashes=False)
 def numbers(n):
