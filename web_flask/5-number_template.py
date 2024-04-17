@@ -1,5 +1,5 @@
  #!/usr/bin/python3
-""" starts the flask app """
+""" Starts the flask app. """
 from flask import Flask
 from flask import render_template
 
@@ -39,7 +39,7 @@ def numbers(n):
 
 @app.route('/number_template/<n>', strict_slashes=False)
 def number_templates(n):
-    """ Display html if n is int"""
+    """ Display html if n is int. """
         return render_template('5-number.html', n=n)
 
 
