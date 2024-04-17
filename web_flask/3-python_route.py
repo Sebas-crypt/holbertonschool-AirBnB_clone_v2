@@ -27,7 +27,7 @@ def text(text):
 def texts(text):
     """ Replace more text with another variable. """
     text = text.replace("_"," ")
-    return 'Python ' + text.replace('_',' ')
+    return ' python ' + text.replace('_',' ')
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)
