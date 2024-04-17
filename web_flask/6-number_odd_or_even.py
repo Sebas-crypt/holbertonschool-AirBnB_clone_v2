@@ -34,7 +34,7 @@ def texts(text):
 @app.route('/number/<int:n>', strict_slashes=False)
 def numbers(n):
     """ Replace with int only if given int. """
-    return str(n) + " is a number "
+    return str(n) + " is a number"
 
 
 @app.route('/number_template/<int:n>', strict_slashes=False)
@@ -46,7 +46,7 @@ def number_templates(n):
 @app.route('/number_odd_or_even/<int:n>', strict_slashes=False)
 def odd_or_even(n):
     """ Display different page depending on var given odd or even. """
-    return render_template ("6-number_odd_or_even.html", n=n, Evenodd = Evenodd)
+    return render_template ("6-number_odd_or_even.html", n=n)
 
 
 if __name__ == '__main__':
