@@ -1,5 +1,7 @@
  #!/usr/bin/python3
+""" starts the flask app """
 from flask import Flask, render_template
+
 app = Flask(__name__)
 
 
@@ -8,16 +10,19 @@ def hello():
     """ Returns some text. """
     return 'Hello HBNB!'
 
+
 @app.route('/HBNB', strict_slashes =False)
 def hbnb() :
     """ Returns other text. """
     return 'HBNB'
+
 
 @app.route('/c/<text>', strict_slashes=False)
 def text(text):
     """ Replace text with variable. """
     text = text.replace ("_", " ")
     return("C {}".format(text))
+
 
 @app.route('/python', defaults={'text': "is cool"}, strict_slashes=False)
 @app.route('/python/<text>', strict_slashes=False)
@@ -26,11 +31,13 @@ def texts(text):
     text = text.replace("_"," ")
     return("python {}".format(text))
 
+
 @app.route('/number/<n>', strict_slashes=False)
 def numbers(n):
     """ Repalce with int only if given int. """
     if n.isdigit():
         return '{} is a number'.format(n)
+
 
 @app.route('/number_template/<n>', strict_slashes=False)
 def number_templates(n):
