@@ -6,13 +6,13 @@ from flask import render_template
 app = Flask(__name__)
 
 
-@app.route('/', strict_slashes =False)
+@app.route('/', strict_slashes=False)
 def hello():
     """ Returns some text. """
     return 'Hello HBNB!'
 
 
-@app.route('/HBNB', strict_slashes =False)
+@app.route('/HBNB', strict_slashes=False)
 def hbnb() :
     """ Returns other text. """
     return 'HBNB'
@@ -21,22 +21,19 @@ def hbnb() :
 @app.route('/c/<text>', strict_slashes=False)
 def text(text):
     """ Replace text with variable. """
-    text = text.replace ("_", " ")
     return 'C ' + text.replace('_', ' ')
 
 
-@app.route('/python', defaults={'text': "is cool"}, strict_slashes=False)
+@app.route('/python/', defaults={'text': "is cool"}, strict_slashes=False)
 @app.route('/python/<text>', strict_slashes=False)
 def texts(text):
     """ Replace more text with another variable. """
-    text = text.replace("_"," ")
     return 'Python ' + text.replace('_',' ')
 
 
 @app.route('/number/<n>', strict_slashes=False)
 def numbers(n):
     """ Repalce with int only if given int. """
-    if n.isdigit():
         return str(n) + " is a number"
 
 
