@@ -34,7 +34,7 @@ def texts(text):
 @app.route('/number/<int:n>', strict_slashes=False)
 def numbers(n):
     """ Replace with int only if given int. """
-    return str(n) + " is a number"
+    return str(n) + " is a number "
 
 
 @app.route('/number_template/<int:n>', strict_slashes=False)
