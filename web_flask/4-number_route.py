@@ -1,42 +1,39 @@
- #!/usr/bin/python3
+#!/usr/bin/python3
 """ starts the flask app """
 from flask import Flask
 
 app = Flask(__name__)
 
 
-@app.route('/', strict_slashes =False)
+@app.route('/', strict_slashes=False)
 def hello():
-    """ Return some text. """
+    """ returns hello HBNB """
     return 'Hello HBNB!'
 
 
-@app.route('/HBNB', strict_slashes =False)
+@app.route('/hbnb', strict_slashes=False)
 def hbnb():
-    """ Return other text. """
+    """ returns HBNB """
     return 'HBNB'
 
 
 @app.route('/c/<text>', strict_slashes=False)
 def text(text):
-    """ Replace text with variable. """
-    text = text.replace ("_", " ")
-    return("C {}".format(text))
+    """ returns C """
+    return 'C ' + text.replace('_', ' ')
 
 
-@app.route('/python', defaults={'text': "is cool"}, strict_slashes=False)
+@app.route('/python/', defaults={'text': "is cool"}, strict_slashes=False)
 @app.route('/python/<text>', strict_slashes=False)
 def texts(text):
-    """ Replace more text with another variable. """
-    text = text.replace("_"," ")
+    """ returns python """
     return 'Python ' + text.replace('_', ' ')
 
 
 @app.route('/number/<int:n>', strict_slashes=False)
 def numbers(n):
-    """ Replace with int only if given int. """
-    if n.isdigit():
-        return '{} is a number'.format(n)
+    """ returns the number """
+    return str(n).replace('_', ' ') + " " + "is a number"
 
 
 if __name__ == '__main__':
