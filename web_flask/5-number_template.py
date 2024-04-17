@@ -1,5 +1,5 @@
- #!/usr/bin/python3
-""" Starts the flask app. """
+#!/usr/bin/python3
+"""Starts the flask app."""
 from flask import Flask
 from flask import render_template
 
@@ -8,39 +8,39 @@ app = Flask(__name__)
 
 @app.route('/', strict_slashes=False)
 def hello():
-    """ Returns some text. """
+    """Return hello HBNB."""
     return 'Hello HBNB!'
 
 
-@app.route('/HBNB', strict_slashes=False)
-def hbnb() :
-    """ Returns other text. """
+@app.route('/hbnb', strict_slashes=False)
+def hbnb():
+    """Return HBNB."""
     return 'HBNB'
 
 
 @app.route('/c/<text>', strict_slashes=False)
 def text(text):
-    """ Replace text with variable. """
+    """Return C."""
     return 'C ' + text.replace('_', ' ')
 
 
 @app.route('/python/', defaults={'text': "is cool"}, strict_slashes=False)
 @app.route('/python/<text>', strict_slashes=False)
 def texts(text):
-    """ Replace more text with another variable. """
-    return 'Python ' + text.replace('_',' ')
+    """Return python."""
+    return 'Python ' + text.replace('_', ' ')
 
 
-@app.route('/number/<n>', strict_slashes=False)
+@app.route('/number/<int:n>', strict_slashes=False)
 def numbers(n):
-    """ Repalce with int only if given int. """
-        return str(n) + " is a number"
+    """Return the number."""
+    return str(n) + " is a number"
 
 
-@app.route('/number_template/<n>', strict_slashes=False)
+@app.route('/number_template/<int:n>', strict_slashes=False)
 def number_templates(n):
-    """ Display html if n is int. """
-        return render_template('5-number.html', n=n)
+    """Display html only if n is an integer."""
+    return render_template("5-number.html", n=n)
 
 
 if __name__ == '__main__':
