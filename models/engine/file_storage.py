@@ -16,8 +16,8 @@ class FileStorage:
         if not isinstance(cls, str):
             cls = cls.__name__
 
-        return {k: v for k, v in self.__objects.items() if k.startswith(cls + ".")}
-
+        return {k: v for k, v in self.__objects.items()
+                if k.startswith(cls + ".")}
 
     def new(self, obj):
         """Adds new object to storage dictionary"""
@@ -52,7 +52,7 @@ class FileStorage:
             with open(FileStorage.__file_path, 'r') as f:
                 temp = json.load(f)
                 for key, val in temp.items():
-                        self.all()[key] = classes[val['__class__']](**val)
+                    self.all()[key] = classes[val['__class__']](**val)
         except FileNotFoundError:
             pass
 
@@ -62,14 +62,7 @@ class FileStorage:
             pass
         else:
             del self.__objects["{}.{}".format(type(obj).__name__, obj.id)]
-            
-    def __init__(self):
-        self.__session = 'Session'()
-    
+
     def close(self):
-        if hasattr(self.__session, 'remove'):
-            self.__session.remove()
-        elif hasattr(self.__session, 'close'):
-            self.__session.close()
-        else:
-            raise AttributeError("Cannot close session, 'remove' or 'close' method not found.")
+        """ call reload """
+        self.reload()
